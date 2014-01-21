@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<!--jQuery Library-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+<!-- Fancybox -->
+<link rel="stylesheet" href="fancyBox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="fancyBox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<link rel="stylesheet" href="command-crib_sheet_stylesheet.css" type="text/css" media="screen"/>
+
+    <head>
+    	<title>Unix Command Crib Sheet</title>
+        <h1>
+            Unix Command Crib Sheet
+        </h1>
+    	    <script type="text/javascript">
+                
+                jQuery(function($){
+                    $("#cd").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#ls").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#mkdir").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#cat").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#ssh").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#top").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#kill").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#grep").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#nice").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#sudo").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+                    $("#rm").fancybox({
+                        transition: "fade",
+                        maxWidth: 600,
+                        autoSize: true,
+                        scrolling: "yes"
+                    });
+
+                });
+
+    	    </script>
+
+    </head>
+
+    <body>
+        <h3>Commands:</h3>
+        <h4>Click on a command to read more about it.</h4>
+        <div id="command_list">
+            <li>
+                <a id="cd" href="#cd_expanded">cd<a/>
+            </li>
+            <li>
+                <a id="ls" href="#ls_expanded">ls<a/>
+            </li>
+            <li>
+                <a id="mkdir" href="#mkdir_expanded">mkdir<a/>
+            </li>
+            <li>
+                <a id="cat" href="#cat_expanded">cat<a/>
+            </li>
+            <li>
+                <a id="ssh" href="#ssh_expanded">ssh<a/>
+            </li>
+            <li>
+                <a id="top" href="#top_expanded">top<a/>
+            </li>
+            <li>
+                <a id="kill" href="#kill_expanded">kill<a/>
+            </li>
+            <li>
+                <a id="grep" href="#grep_expanded">grep<a/>
+            </li>
+            <li>
+                <a id="nice" href="#nice_expanded">nice<a/>
+            </li>
+            <li>
+                <a id="sudo" href="#sudo_expanded">sudo<a/>
+            </li>
+            <li>
+                <a id="rm" href="#rm_expanded">rm<a/>
+            </li>
+        </div>
+
+        <!-- Hidden fancybox content-->
+    <div id="fancy">
+        <div style="display:none">
+            <p id="cd_expanded" method="post" action="">
+                Example: cd homework/shell-guide
+                Short for "Change directory", cd (optionally) takes one argument: the name of the desired directory the user wishes to navigate to. cd alone will take the user to his or her home directory.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="ls_expanded" method="post" action="">
+                Example: ls
+                Short for "List", ls lists all the files in the user's current directory. Optional arguments are available, such as "-l", which lists files in "long format" (size, date modified, etc.)
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="mkdir_expanded" method="post" action="">
+                Example: mkdir new_folder
+                Short for "make directory", mkdir does just that. The required argument after mkdir is the name of the new directory. This command is the same as creating a new folder in a Graphical User Interface.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="cat_expanded" method="post" action="">
+                Example: cat example.txt anotherexample.txt
+                Short for "Catenate", cat takes at least one argument (in the form of a text file) and concatenates the file(s) and prints to standard output.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="ssh_expanded" method="post" action="">
+                Example: ssh whusted@my.cs.lmu.edu
+                Short for "Secure Shell", ssh is a progam for logging into a remote machine and for executing commands on a remote machine. LMU students will most likely use ssh in the above example.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="top_expanded" method="post" action="">
+                Example: top
+                Short for "Table of Processes", the top command displays to standard output an ordered list of running processes, updating periodically if left running. Pragmatically it can be used to see if a certain application is using a lot of the CPU.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="kill_expanded" method="post" action="">
+                Example: kill 1111
+                "Kill" is a command that is used in several popular operating systems to send signals to running processes in order to request the termination of the process. The argument is the process's ID. Like many other commands, this one does what it sounds like it does.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="grep_expanded" method="post" action="">
+                Example: grep willy testfile.txt
+                "Grep" is a utility for searching plain-text data sets for lines matching a regular expression. In the example above, "willy" is the regular expression being searched for in testfile.txt. If found, the expression is highlighted and printed to standard output. If not found, nothing is printed to standard output.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="nice_expanded" method="post" action="">
+                Example: nice -20 test.java
+                "nice" is used to invoke a utility or shell script with a particular priority, thus giving the process more or less CPU time than other processes. -20 (used in the above example) is the highest priority a process can have.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="sudo_expanded" method="post" action="">
+                Example: sudo rm test.txt
+                sudo is a program for Unix-like computer operating systems that allows users to run programs with the security privileges of another user (usually this is the superuser). sudo requires a password to be performed; it's like a Trump card.
+
+            <a href="http://xkcd.com/149/">Here</a> is a great example of how to use sudo.
+            </p>
+        </div>
+        <div style="display:none">
+            <p id="rm_expanded" method="post" action="">
+                Example: rm test.txt
+                Short for "remove", rm removes the file whose name is given as the argument. In the above example, test.txt is removed from the current directory (if it is in fact present).
+            </p>
+        </div>
+    </div>
+    </body>
