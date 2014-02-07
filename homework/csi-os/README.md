@@ -3,7 +3,7 @@
 ### Linux
 
 ##### Pre-OS
-<img src="csi-os/linux-preos.jpg"></img>
+<img src="linux-preos.jpg"></img>
 
 ##### Kernel
 <img src="csi-os/linuxkernel.png"></img>
