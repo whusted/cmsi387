@@ -33,3 +33,20 @@
 
 ##### Network settings
 <img src="csi-os/macNetwork.png"></img>
+
+### Windows
+
+##### Pre-OS
+<img src="csi-os/Windows-preos.jpg"></img>
+
+##### Kernel
+<img src="csi-os/windows-kernel.jpg"></img>
+
+##### Startup Scripts
+<img src="csi-os/window-startup.jpg"></img>
+
+##### First process
+<img src="csi-os/window-firstprocess.jpg"></img>
+
+##### Network settings
+<img src="csi-os/windowsNetwork.jpg"></img>
