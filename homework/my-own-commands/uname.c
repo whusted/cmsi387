@@ -1,6 +1,6 @@
 /**
- * This program demonstrates invocation of the mkdir
- * system call (39) using the syscall function.
+ * This program demonstrates invocation of the uname
+ * system call (122) using the syscall function.
  */
 #include <sys/types.h> 
 #include <sys/utsname.h>
