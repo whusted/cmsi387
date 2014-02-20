@@ -10,12 +10,24 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-// For convenience, we just use the stdio functions to display
-// the output for this one.
-#include <stdio.h>
-
 int main(int argc, char *argv[]) {
-  // We keep the hardcoded system call numbers to illustrate
-  // that they are still just that: numbers.
-  syscall(15, argv[1], S_IRUSR | S_IRGRP | S_IROTH);
+  //Accepts either 777 for full permissions or 444 for read only.
+  //All calls should have all 3 numbers as arguments.
+  if (argc < 3) {
+  	return -1;
+  }
+
+  int input = atoi(argv[2]);
+  
+  // Read only
+  if (input == 444) {
+      syscall(15, argv[1], S_IRUSR | S_IRGRP | S_IROTH);
+  }
+
+  // Full permissions
+  if (input == 777) {
+      syscall(15, argv[1], S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IXGRP | S_IROTH | S_IWOTH | S_IXOTH);
+  }
+
+  return 0;
 }
