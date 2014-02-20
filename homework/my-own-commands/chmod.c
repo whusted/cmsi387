@@ -12,8 +12,8 @@
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
-  //Accepts either 777 for full permissions or 444 for read only.
-  //All calls should have all 3 numbers as arguments.
+  // Accepts either 777 for full permissions or 444 for read only.
+  // All calls should have all 3 numbers as arguments.
   int errorCheck;
   if (argc < 3) {
   	errorCheck = -1;
