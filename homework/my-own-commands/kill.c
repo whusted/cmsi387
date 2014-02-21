@@ -13,7 +13,8 @@
 int main(int argc, char *argv[]) {
   
   int id = atoi(argv[1]);
-  int result = syscall(37, id);
+  // Hardcoded kill call
+  int result = syscall(37, id, 9);
 
   // A result of -1 means that something went wrong.
   if (result == -1) {
