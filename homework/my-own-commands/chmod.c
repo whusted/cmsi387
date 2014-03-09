@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
   }
 
   if (errorCheck == -1) {
+      // JD: For consistency with your other commands, this should go to stderr.
       printf("%s", "Please input a file followed by 444 or 777\n");
       return -1;
   } else {
