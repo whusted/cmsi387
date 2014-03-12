@@ -1,0 +1,54 @@
+diff --git a/Makefile b/Makefile
+index aa8a158..7bd1ecc 100644
+--- a/Makefile
++++ b/Makefile
+@@ -764,7 +764,7 @@ export mod_sign_cmd
+ 
+ 
+ ifeq ($(KBUILD_EXTMOD),)
+-core-y		+= kernel/ mm/ fs/ ipc/ security/ crypto/ block/
++core-y		+= kernel/ mm/ fs/ ipc/ security/ crypto/ block/ hello_world/
+ 
+ vmlinux-dirs	:= $(patsubst %/,%,$(filter %/, $(init-y) $(init-m) \
+ 		     $(core-y) $(core-m) $(drivers-y) $(drivers-m) \
+diff --git a/arch/x86/syscalls/syscall_32.tbl b/arch/x86/syscalls/syscall_32.tbl
+index aabfb83..174b5a4 100644
+--- a/arch/x86/syscalls/syscall_32.tbl
++++ b/arch/x86/syscalls/syscall_32.tbl
+@@ -357,3 +357,4 @@
+ 348	i386	process_vm_writev	sys_process_vm_writev		compat_sys_process_vm_writev
+ 349	i386	kcmp			sys_kcmp
+ 350	i386	finit_module		sys_finit_module
++351     i386    sys_hello               sys_hello
+diff --git a/hello_world/Makefile b/hello_world/Makefile
+new file mode 100644
+index 0000000..9aea5e8
+--- /dev/null
++++ b/hello_world/Makefile
+@@ -0,0 +1 @@
++obj-y := sys_hello.o
+diff --git a/hello_world/sys_hello.c b/hello_world/sys_hello.c
+new file mode 100644
+index 0000000..9af7b53
+--- /dev/null
++++ b/hello_world/sys_hello.c
+@@ -0,0 +1,7 @@
++#include <linux/kernel.h>
++
++asmlinkage long sys_hello(void) {
++  printk(KERN_EMERG "Hola Mundo.");
++  return 0;
++} 
++
+diff --git a/include/linux/syscalls.h b/include/linux/syscalls.h
+index 94273bb..b2d21f9 100644
+--- a/include/linux/syscalls.h
++++ b/include/linux/syscalls.h
+@@ -847,4 +847,7 @@ asmlinkage long sys_process_vm_writev(pid_t pid,
+ asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type,
+ 			 unsigned long idx1, unsigned long idx2);
+ asmlinkage long sys_finit_module(int fd, const char __user *uargs, int flags);
++
++asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type, unsigned long idx1, unsigned long idx2);
++asmlinkage long sys_hello(void);
+ #endif
