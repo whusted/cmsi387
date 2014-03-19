@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<head>
+    <h1>Modify an Ubuntu Kernel</h1>
+</head>
+<h3>by Willy Husted</h3>
+
+<body> 
+  <h2>Install and Build an Ubuntu Kernel</h2>
+    <p>
+      1. The <b>first</b> step is to download and install the latest Ubuntu desktop,
+      which can be done <a href="http://www.ubuntu.com/download/desktop">here</a>. When asked to choose a "flavor", I chose 32-bit and the rest of this how-to will assume you have done the same, although many of the instructions will be similar with small tweaks if you choose 64-bit.
+      <br>
+      <br>
+      The <b>second</b> step is to obtain the source code for the latest Ubuntu kernel.
+      <br>
+      In your virtual machine's terminal, enter:
+      <br>
+      <h4><code>git clone git://kernel.ubuntu.com/ubuntu/ubuntu-&ltrelease&gt.git</code></h4>
+      <br>
+      In my case, <code>release</code> was <code>ubuntu-trusty</code> but modifications and updates happen frequently to Ubuntu so check to make sure you have the latest stable version.
+      <br>
+      <br>
+      It will take some time for the source download. When it has finished, there will be a folder in your current working directory (found by typing <code>pwd</code>) called <code>ubuntu-&ltrelease&gt</code> with <code>release</code> replaced by the latest install.
+      <br>
+      <br>
+      2. The <b>second</b> step is to install certain packages needed to build a kernel, which is done by exectuing the following command:
+      <br>
+      <h4><code>sudo apt-get build-dep linux-image-$(uname -r)</code></h4>
+      You now have the source code and have installed the proper packages for the build environment.
+      <br>
+      <br>
+      3. The <b>third</b> step is to build the kernel. Navigate your working directory to the kernel source code folder and execute the following commands:
+      <br>
+      <h4>
+      	  <code>
+      	  fakeroot debian/rules clean
+      	  <br>
+          fakeroot debian/rules binary-headers binary-generic
+          </code>
+      </h4>
+      Assuming now errors were produced, you can now install your kernel by executing the following command:
+      <h4><code>sudo dpkg -i linux*&ltcurrent-version&gt*.deb</code></h4>
+      <br>
+      Replace <code>&ltcurrent-version&gt</code> with the string of numbers found in your <code>.deb</code> files that are located in the directory above your source directory.
+      <br>
+      Finally, <code>sudo reboot</code> will reboot your machine.
+    </p>
+  <h2>How to Build Your Own System Call</h2>
+  <p>
+    Follow these instructions to add your own custom system call to a 32-bit version of Ubuntu 13.12. Again, the version of your kernel will likely be different, but the general procedure is the same.
+    <br>
+    <br>
+    1. <b>First</b>, there are files that need to be created to add a custom system call. In your root folder of the kernel source code, create a new directory. I called mine <code>hello_world/</code>
+    <br>
+    <br>
+    Here's where my directory lies:
+    <h4><code>ubuntu-trusty/hello_world/</code></h4>
+    In the directory you just made, create a .c file - I called mine <code>sys_hello.c</code>
+    <br>
+    To create a Spanish version of "Hello world", I entered the following into <code>sys_hello.c</code>:
+    <h4>
+      <code>
+    	#include &ltlinux/kernel.h&gt
+    	<br>
+    	<br>
+        asmlinkage long sys_hello(void) {
+        <br>
+        &nbsp&nbsp&nbsp&nbspprintk(KERN_EMERG "Hola Mundo.");
+            <br>
+        &nbsp&nbsp&nbsp&nbspreturn 0;
+            <br>
+	    }
+      </code>
+    </h4>
+     <code>printk</code> prints out the log messages of the kernel. <code>KERN_EMERG</code> logs messages that are considered to be an emergency. This is not necessary to add.
+    <br>
+    <br>
+    Next, you need to create a new Makefile. In this case, you need to specify the <code>.o</code> object file that will be produced when the <code>sys_hello.c</code> file compiles.
+    <br>
+    <br>
+    The Makefile should be located in the directory you created - in my case, it lies here:
+    <br>
+    <h4><code>ubuntu-trusty/hello_world/Makefile</code></h4>
+    Inside the file, all you need is this:
+
+    <h4><code>obj-y := sys_hello.o</code></h4>
+    <br>
+    2. <b>Second</b>, there are system files that need to be modified.
+    Navigate to:
+    <h4><code>ubuntu-trusty/arch/x86/syscalls/syscall_32.tbl</code></h4>
+    or whatever your equivalent version is.
+    <br>
+    At the end of <code>syscall_32.tbl</code> you will notice something like:
+    <h4><code>350&nbsp&nbsp&nbsp&nbspi386&nbsp&nbsp&nbsp&nbspfinit_module&nbsp&nbsp&nbsp&nbspsys_finit_module</code></h4>
+    You need to add another entry into the table file right below the last entry with the exact same format of the previous entries.
+    Mine looked like this:
+    <h4>
+    	<code>351&nbsp&nbsp&nbsp&nbspi386&nbsp&nbsp&nbsp&nbspsys_hello&nbsp&nbsp&nbsp&nbspsys_hello</code>
+    </h4>
+
+    The second file to modify is:
+    <h4><code>ubuntu-trusty/include/linux/syscalls.h</code></h4>
+    There will be a list of wrapper functions of the system calls available. Right before the <code>#endif</code>, add your custom wrapper function. Mine looked like this, with context provided of where to place your function:
+
+    <h4>
+    	<code>
+    		asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type, unsigned long idx1, unsigned long idx2);
+    		<br>
+ asmlinkage long sys_finit_module(int fd, const char __user *uargs, int flags);
+            <br>
+    		<br>
+
+asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type, unsigned long idx1, unsigned long idx2);
+            <br>
+asmlinkage long sys_hello(void);
+            <br>
+ #endif
+
+    	</code>
+    </h4>
+
+     The third file to modify is:
+    <h4><code>ubuntu-trusty/Makefile</code></h4>
+    Locate a line that looks like this:
+    <h4><code>core-y&nbsp&nbsp&nbsp&nbsp+= kernel/ mm/ fs/ ipc/ security/ crypto/ block/</code></h4>
+    You need to add the directory you created that contains your custom system call.
+    <br>
+    Appending the directory to the end of the list, mine looked like this:
+    <h4><code>core-y&nbsp&nbsp&nbsp&nbsp+= kernel/ mm/ fs/ ipc/ security/ crypto/ block/ hello_world/</code></h4>
+    This line tells the kernel that, when building, look into the <code>hello_world/</code> directory to access our custom system call.
+    <br>
+    <br>
+    It is now time to <b>test your custom system call</b>.
+    <br>
+    First, rebuild and install your kernel by following the directions above. Again, this may take quite a while.
+    <br>
+    <br>
+    When your kernel installs, execute <code>sudo reboot</code> and continuously type the shift key while your machine reboots. You will be given a boot loader menu with options of which kernel to load. Choose the most recent kernel, most likely the one at the top of the menu.
+    <br>
+    <br>
+    Once you have logged in, create a <code>.c</code> file (the name doesn't matter). I called mine <code>test_sys_call.c</code>
+    <br>
+    Inside the newly created file, write:
+    <h4>
+        <code>
+        	#include &ltstdio.h&gt
+        	<br>
+            #include &ltlinux/kernel.h&gt
+            <br>
+            #include &ltsys/syscall.h&gt
+            <br>
+            #include &ltunistd.h&gt
+            <br>
+            <br>
+            long hello_syscall(void) {
+            <br>
+            &nbsp&nbsp&nbsp&nbspreturn syscall(351);
+            <br>
+            }
+            <br>
+            <br>
+            int main(int argc, char *argv[]) {
+            <br>
+            &nbsp&nbsp&nbsp&nbsplong int a = hello_syscall();
+            <br>
+            &nbsp&nbsp&nbsp&nbspprintf("System call returned %ld\n", a);
+            <br>
+            &nbsp&nbsp&nbsp&nbspreturn 0;
+            <br>
+            }
+        </code>
+
+    </h4>
+    The hardcoded 351 is the custom system call. Keep in mind you may have a different (probably slightly larger) number.
+    <br>
+    Next, compile and run your <code>.c</code> program:
+    <h4><code>gcc -o sys_hello test_sys_call.c &amp&amp ./sys_hello</code></h4>
+    To see your custom system call in action, execute the command
+    <h4><code>dmesg</code></h4>
+    One of the most recent logs should contain your system call.
+    <br>
+    <br>
+    Thanks for reading!
+
+
+
+
+  </p>
+
+
+
+
+</body>
