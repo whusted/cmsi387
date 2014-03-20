@@ -11,7 +11,7 @@ int main() {
     while (1) {
         char command[256];
         printf("Enter the command to run: ");
-        scanf("%s", command);
+        scanf("%[^\n]\n", command);
 
         /* Variable that will store the fork result. */
         pid_t pid;
