@@ -10,6 +10,7 @@
 int main() {
     /* String to hold the command to run. */
     while (1) {
+        int noAmpersand = 1;
         char *arguments[10];
         char input[256];
         printf("Enter the command to run: ");
@@ -25,12 +26,14 @@ int main() {
 
         arguments[index] = NULL;
 
-        /*Now for some checks. exit, cd, and secret-system-call are special cases*/
+        /* Now for some checks. exit, cd, and secret-system-call are special cases. */
         if (strcmp("exit", arguments[0]) == 0) {
             return 1;
         } else if (strcmp("cd", arguments[0]) == 0) {
             chdir(arguments[1]);
         }
+
+        /* Check if & is last character*/
 
         /* Variable that will store the fork result. */
         pid_t pid;
@@ -48,7 +51,10 @@ int main() {
         } else {
             /* Parent process. */
             int result;
-            wait(&result);
+            //If the last character is &, run concurrently with the shell
+            if (noAmpersand) {
+                wait(&result);
+            }
             printf("All done; result = %d\n", result);
         }
     }
