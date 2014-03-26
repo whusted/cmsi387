@@ -8,6 +8,7 @@
 
 ##### Evidence of Threading
 <img src="mac_threading.png"></img>
+###### This shows Sum.java running in the back terminal while ps -eLf displays the threads of the current program.
 
 ### Linux
 
@@ -18,3 +19,5 @@
 
 ##### Evidence of Threading
 <img src="linux_threading.png"></img>
+###### This shows Sum.java running in the back terminal while ps -eLf displays the threads of the current program.
+
