@@ -18,12 +18,10 @@ int main() {
 
          /* Check if & is last character BEFORE tokenizing*/
         if (input[strlen(input) - 2] == '&') {
+            // Remove &
             input[strlen(input) - 2] = '\0';
             noAmpersand = 0;
         }
-
-        printf("%s", input);
-
 
         /* Tokenize */
         char * individualArgs = strtok(input, " \n");
