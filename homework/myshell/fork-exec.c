@@ -39,6 +39,8 @@ int main() {
             return 1;
         } else if (strcmp("cd", arguments[0]) == 0) {
             chdir(arguments[1]);
+        } else if (strcmp("secret-system-call", arguments[0]) == 0) {
+            int result = syscall(351);
         }
 
         /* Variable that will store the fork result. */
