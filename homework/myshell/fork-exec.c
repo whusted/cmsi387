@@ -25,6 +25,12 @@ int main() {
 
         arguments[index] = NULL;
 
+        /*Now for some checks. exit, cd, and secret-system-call are special cases*/
+        if (strcmp("exit", arguments[0]) == 0) {
+            return 1;
+        } else if (strcmp("cd", arguments[0]) == 0) {
+            chdir(arguments[1]);
+        }
 
         /* Variable that will store the fork result. */
         pid_t pid;
