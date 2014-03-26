@@ -41,30 +41,31 @@ int main() {
             chdir(arguments[1]);
         } else if (strcmp("secret-system-call", arguments[0]) == 0) {
             int result = syscall(351);
-        }
-
-        /* Variable that will store the fork result. */
-        pid_t pid;
-
-        /* Perform the actual fork. */
-        pid = fork();
-        if (pid < 0) {
-            /* Error condition. */
-            fprintf(stderr, "Fork failed\n");
-            return -1;
-        } else if (pid == 0) {
-            /* Child process. */
-            printf("Running...\n");
-            execvp(arguments[0], arguments);
         } else {
-            /* Parent process. */
-            int result;
-            //If the last character is &, run concurrently with the shell
-            if (noAmpersand) {
-                wait(&result);
-            }
 
-            printf("All done; result = %d\n", result);
+            /* Variable that will store the fork result. */
+            pid_t pid;
+
+            /* Perform the actual fork. */
+            pid = fork();
+            if (pid < 0) {
+                /* Error condition. */
+                fprintf(stderr, "Fork failed\n");
+                return -1;
+            } else if (pid == 0) {
+                /* Child process. */
+                printf("Running...\n");
+                execvp(arguments[0], arguments);
+            } else {
+                /* Parent process. */
+                int result;
+                //If the last character is &, run concurrently with the shell
+                if (noAmpersand) {
+                    wait(&result);
+                }
+
+                printf("All done; result = %d\n", result);
+            }
         }
     }
 
