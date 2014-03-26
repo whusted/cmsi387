@@ -16,6 +16,16 @@ int main() {
         printf("Enter the command to run: ");
         fgets(input, sizeof(input), stdin);
 
+         /* Check if & is last character BEFORE tokenizing*/
+        if (input[strlen(input) - 2] == '&') {
+            input[strlen(input) - 2] = '\0';
+            noAmpersand = 0;
+        }
+
+        printf("%s", input);
+
+
+        /* Tokenize */
         char * individualArgs = strtok(input, " \n");
         int index = 0;
         while (individualArgs != NULL) {
@@ -32,8 +42,6 @@ int main() {
         } else if (strcmp("cd", arguments[0]) == 0) {
             chdir(arguments[1]);
         }
-
-        /* Check if & is last character*/
 
         /* Variable that will store the fork result. */
         pid_t pid;
@@ -55,6 +63,7 @@ int main() {
             if (noAmpersand) {
                 wait(&result);
             }
+
             printf("All done; result = %d\n", result);
         }
     }
