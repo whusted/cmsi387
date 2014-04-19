@@ -28,5 +28,5 @@ int getPhysical(int logical) {
     return ERR_INVALID;
   }
   
-  return ((ptr[leftBits].frame) << PAGEBITS);
+  return (((ptr[leftBits].frame) << PAGEBITS) + rightBits);
 }
