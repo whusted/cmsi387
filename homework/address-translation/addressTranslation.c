@@ -17,4 +17,15 @@ int getPhysical(int logical) {
   if (logical < 0 || logical >= 256) {
     return ERR_OUT_OF_RANGE;
   }
+
+  // Get left and right bits
+  int leftBits = ((logical & PAGEMASK) >> PAGEBITS);
+  int rightBits = (logical & PAGESIZE);
+
+
+  // Check if page is valid
+  if (ptr[leftBits].valid == 0) {
+    return ERR_INVALID;
+  }
+  
 }
