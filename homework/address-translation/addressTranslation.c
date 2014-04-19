@@ -13,5 +13,8 @@ void setPageTable(pagetable *pt) {
 }
 
 int getPhysical(int logical) {
-    // TODO
+  // Check if argument is out of range
+  if (logical < 0 || logical >= 256) {
+    return ERR_OUT_OF_RANGE;
+  }
 }
