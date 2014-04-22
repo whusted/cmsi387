@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <semaphore.h>
 #include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #define PHILOSOPHERS 5
 #define THINKING 0
@@ -95,11 +97,8 @@ int main(int argc, char const *argv[]) {
     chopstick_condition[i] = 0;
     pthread_mutex_init(&chopsticks[i], NULL);
     // Call run in new thread
+    pthread_create(&philosophers[i], NULL, run, &philosopher_index[i]);
   }
-
-
-
-	
 
 	return 0;
 }
