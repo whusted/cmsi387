@@ -12,6 +12,7 @@ pthread_mutex_t chopsticks[PHILOSOPHERS];
 int chopstick_condition[PHILOSOPHERS];
 
 int philosopher_condition[PHILOSOPHERS];
+int philosopher_index[PHILOSOPHERS];
 
 void pickUpChopstick(int chopstick) {
   //lock mutex
@@ -84,8 +85,19 @@ void* run(void* philosopher) {
 
 int main(int argc, char const *argv[]) {
 
-    // Philosophers are the threads
+  // Philosophers are the threads
 	pthread_t philosophers[PHILOSOPHERS];
+
+  // Loop through philosopher indexes, initialize to thinking
+  for (int i = 0; i < PHILOSOPHERS; i++) {
+    philosopher_condition[i] = THINKING;
+    philosopher_index[i] = i;
+    chopstick_condition[i] = 0;
+    pthread_mutex_init(&chopsticks[i], NULL);
+    // Call run in new thread
+  }
+
+
 
 	
 
