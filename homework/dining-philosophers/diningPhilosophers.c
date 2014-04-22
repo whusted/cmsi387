@@ -37,6 +37,7 @@ void eat(int philosopher) {
   
   // set current philosopher condtion to eating
   philosopher_condition[philosopher] = EATING;
+  printf("%s\n", "In eat func");
   // eat for random time
   randomWait(10);
 }
@@ -85,9 +86,9 @@ void* run(void* philosopher) {
 
     if (philosopher_condition[current] == THINKING) {
       think(current);
-    } else if (philosopher_condition[current] == EATING) {
-      eat(current);
     } else if (philosopher_condition[current] == HUNGRY) {
+      eat(current);
+    } else if (philosopher_condition[current] == EATING) {
       finishedEating(current);
     }
   }
