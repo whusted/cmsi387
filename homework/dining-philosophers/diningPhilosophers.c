@@ -37,7 +37,6 @@ void eat(int philosopher) {
   
   // set current philosopher condtion to eating
   philosopher_condition[philosopher] = EATING;
-  printf("%s\n", "In eat func");
   // eat for random time
   randomWait(10);
 }
@@ -49,7 +48,6 @@ void think(int philosopher) {
 }
 
 void finishedEating(int philosopher) {
-  // should be called when philosopher condition is eating
   // drop chopsticks individually
   dropChopstick(philosopher);
   dropChopstick((philosopher + 1) % PHILOSOPHERS);
@@ -68,13 +66,14 @@ void printPhilosophers() {
   // loop through and print condition of each phil
   for (int i = 0; i < PHILOSOPHERS; i++) {
     if (philosopher_condition[i] == HUNGRY) {
-      printf("%s\n", "HUNGRY  ");
+      printf("%s", "HUNGRY  ");
     } else if (philosopher_condition[i] == THINKING) {
-      printf("%s\n", "THINKING  ");
+      printf("%s", "THINKING  ");
     } else if (philosopher_condition[i] == EATING) {
-      printf("%s\n", "EATING  ");
+      printf("%s", "EATING  ");
     }
   }
+  printf("\n");
 }
 
 void* run(void* philosopher) {
