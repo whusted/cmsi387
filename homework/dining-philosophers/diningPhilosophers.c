@@ -42,14 +42,15 @@ void think(int philosopher) {
   // think for random time
   randomWait(10);
   philosopher_condition[philosopher] = HUNGRY;
-  // philosopher condition should change to hungry... meaning a 3rd function is needed
 }
 
 void finishedEating(int philosopher) {
   // should be called when philosopher condition is eating
   // drop chopsticks individually
-
+  dropChopstick(philosopher);
+  dropChopstick((philosopher + 1) % PHILOSOPHERS);
   // philosopher condition should change to thinking
+  philosopher_condition[philosopher] = THINKING;
 }
 
 // From bounded buffer
@@ -78,9 +79,6 @@ void* run(void* philosopher) {
     } else if (philosopher_condition[current] == HUNGRY) {
       finishedEating(current);
     }
-
-
-
   }
 }
 
