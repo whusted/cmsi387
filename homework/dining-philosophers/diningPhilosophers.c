@@ -64,8 +64,16 @@ int randomWait(int bound) {
 }
 
 void printPhilosophers() {
-  //Eventually loop through and print condition of each phil
-  printf("to be implemented");
+  // loop through and print condition of each phil
+  for (int i = 0; i < PHILOSOPHERS; i++) {
+    if (philosopher_condition[i] == HUNGRY) {
+      printf("%s\n", "HUNGRY  ");
+    } else if (philosopher_condition[i] == THINKING) {
+      printf("%s\n", "THINKING  ");
+    } else if (philosopher_condition[i] == EATING) {
+      printf("%s\n", "EATING  ");
+    }
+  }
 }
 
 void* run(void* philosopher) {
@@ -85,7 +93,7 @@ void* run(void* philosopher) {
   }
 }
 
-int main(int argc, char const *argv[]) {
+int main() {
 
   // Philosophers are the threads
 	pthread_t philosophers[PHILOSOPHERS];
@@ -98,6 +106,10 @@ int main(int argc, char const *argv[]) {
     pthread_mutex_init(&chopsticks[i], NULL);
     // Call run in new thread
     pthread_create(&philosophers[i], NULL, run, &philosopher_index[i]);
+  }
+
+  for (int i = 0; i < PHILOSOPHERS; i++) {
+    pthread_join(philosophers[i], NULL);
   }
 
 	return 0;
