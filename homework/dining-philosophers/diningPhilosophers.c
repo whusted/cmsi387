@@ -45,7 +45,7 @@ void think(int philosopher) {
   // philosopher condition should change to hungry... meaning a 3rd function is needed
 }
 
-void finishedEating() {
+void finishedEating(int philosopher) {
   // should be called when philosopher condition is eating
   // drop chopsticks individually
 
@@ -59,27 +59,37 @@ int randomWait(int bound) {
   return wait;
 }
 
+void printPhilosophers() {
+  //Eventually loop through and print condition of each phil
+  printf("to be implemented");
+}
+
+void* run(void* philosopher) {
+  int current = *(int*) philosopher;
+  // Now make them eat and think until the end of time
+  while (1) {
+    //print the conditions of the philosophers
+    printPhilosophers();
+
+    if (philosopher_condition[current] == THINKING) {
+      think(current);
+    } else if (philosopher_condition[current] == EATING) {
+      eat(current);
+    } else if (philosopher_condition[current] == HUNGRY) {
+      finishedEating(current);
+    }
+
+
+
+  }
+}
+
 int main(int argc, char const *argv[]) {
 
     // Philosophers are the threads
 	pthread_t philosophers[PHILOSOPHERS];
 
-	// Now make them eat and think until the end of time
-	//while (1) {
-    //print the states of the philosophers
-    //printPhilosophers();
-
-    // if (philosopher_condition[current] == THINKING) {
-    //   think();
-    // } else if (philosopher_condition[current] == EATING) {
-    //   eat();
-    // } else if (philosopher_condition[current] == HUNGRY) {
-    //   finishedEating()
-    // }
-
-
-
-	//}
+	
 
 	return 0;
 }
