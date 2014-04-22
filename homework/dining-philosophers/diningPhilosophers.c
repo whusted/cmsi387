@@ -21,14 +21,26 @@ void eat() {
   // set current philosopher condtion to eating 
   // philosopher_condition[] = EATING;
   // eat for random time
+  randomWait(10);
 }
 
 void think() {
   // think for random time
+  randomWait(10);
   // philosopher condition should change to hungry... meaning a 3rd function is needed
 }
 
-//Need a wait time function
+void finishedEating() {
+  // should be called when philosopher condition is eating
+  // philosopher condition should change to thinking
+}
+
+// From bounded buffer
+int randomWait(int bound) {
+  int wait = rand() % bound;
+  sleep(wait);
+  return wait;
+}
 
 int main(int argc, char const *argv[]) {
 
