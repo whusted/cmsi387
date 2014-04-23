@@ -24,7 +24,7 @@ void pickUpChopstick(int chopstick) {
   pthread_mutex_lock(&chopsticks[chopstick]);
   // Check if current chopstick is already picked up
   if (chopstick_condition[chopstick] < 0) {
-        printf("*** CRITICAL SECTION VIOLATION ***\n");
+        printf("*** CRITICAL SECTION VIOLATION; TERMINATING ***\n");
         exit(1);
     }
   chopstick_condition[chopstick] += 1;
