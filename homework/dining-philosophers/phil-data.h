@@ -2,8 +2,10 @@
 #define __PHIL_DATA__
 
 #include <stdio.h>
-#include <pthread.h>
 #include <semaphore.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #define PHILOSOPHERS 5
 #define THINKING 0
@@ -21,5 +23,17 @@ int philosopher_index[PHILOSOPHERS];
  * Initializes synchronization primitives.
  */
 void printPhilosophers(void);
+
+int pickUpChopstick(int chopstick);
+
+void dropChopstick(int chopstick);
+
+int randomWait(int bound);
+
+void eat(int philosopher);
+
+void think(int philosopher);
+
+void finishedEating(int philosopher);
 
 #endif

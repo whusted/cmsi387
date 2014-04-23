@@ -6,57 +6,6 @@
 
 #include "phil-data.h"
 
-int pickUpChopstick(int chopstick) {
-  //lock mutex
-  pthread_mutex_lock(&chopsticks[chopstick]);
-  // Check if current chopstick is already picked up
-  if (chopstick_condition[chopstick] < 0) {
-        printf("*** CRITICAL SECTION VIOLATION ***\n");
-        return -1;
-    }
-  // Bump current chopstick state by 1
-  chopstick_condition[chopstick] += 1;
-  return 0;
-
-}
-
-void dropChopstick(int chopstick) {
-  //unlock mutex
-  pthread_mutex_unlock(&chopsticks[chopstick]);
-  chopstick_condition[chopstick] -= 1;
-}
-
-void eat(int philosopher) {
-  pickUpChopstick(philosopher);
-  pickUpChopstick((philosopher + 1) % PHILOSOPHERS);
-  
-  // set current philosopher condtion to eating
-  philosopher_condition[philosopher] = EATING;
-  // eat for random time
-  randomWait(10);
-}
-
-void think(int philosopher) {
-  // think for random time
-  randomWait(10);
-  philosopher_condition[philosopher] = HUNGRY;
-}
-
-void finishedEating(int philosopher) {
-  // drop chopsticks individually
-  dropChopstick(philosopher);
-  dropChopstick((philosopher + 1) % PHILOSOPHERS);
-  // philosopher condition should change to thinking
-  philosopher_condition[philosopher] = THINKING;
-}
-
-// From bounded buffer
-int randomWait(int bound) {
-  int wait = rand() % bound;
-  sleep(wait);
-  return wait;
-}
-
 void* run(void* philosopher) {
   int current = *(int*) philosopher;
   // Now make them eat and think until the end of time
@@ -88,7 +37,7 @@ int main() {
     // Call run in new thread
     pthread_create(&philosophers[i], NULL, run, &philosopher_index[i]);
   }
-  // While (1) prevents us from ever getting here
+  // While loop in run prevents us from ever getting here
   for (int i = 0; i < PHILOSOPHERS; i++) {
     pthread_join(philosophers[i], NULL);
   }
