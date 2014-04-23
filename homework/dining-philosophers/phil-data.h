@@ -20,7 +20,7 @@ int philosopher_index[PHILOSOPHERS];
 
 void printPhilosophers(void);
 
-int pickUpChopstick(int chopstick);
+void pickUpChopstick(int chopstick);
 
 void dropChopstick(int chopstick);
 

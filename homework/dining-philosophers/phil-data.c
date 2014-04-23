@@ -20,15 +20,14 @@ void printPhilosophers() {
   printf("\n");
 }
 
-int pickUpChopstick(int chopstick) {
+void pickUpChopstick(int chopstick) {
   pthread_mutex_lock(&chopsticks[chopstick]);
   // Check if current chopstick is already picked up
   if (chopstick_condition[chopstick] < 0) {
         printf("*** CRITICAL SECTION VIOLATION ***\n");
-        return -1;
+        exit(1);
     }
   chopstick_condition[chopstick] += 1;
-  return 0;
 
 }
 
