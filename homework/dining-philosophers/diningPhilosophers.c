@@ -6,12 +6,17 @@
 
 #include "phil-data.h"
 
-void pickUpChopstick(int chopstick) {
+int pickUpChopstick(int chopstick) {
   //lock mutex
   pthread_mutex_lock(&chopsticks[chopstick]);
   // Check if current chopstick is already picked up
+  if (chopstick_condition[chopstick] < 0) {
+        printf("*** CRITICAL SECTION VIOLATION ***\n");
+        return -1;
+    }
   // Bump current chopstick state by 1
   chopstick_condition[chopstick] += 1;
+  return 0;
 
 }
 
