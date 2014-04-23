@@ -4,17 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define PHILOSOPHERS 5
-#define THINKING 0
-#define EATING 1
-#define HUNGRY 2
-
-// Chopsticks are shared resource
-pthread_mutex_t chopsticks[PHILOSOPHERS];
-int chopstick_condition[PHILOSOPHERS];
-
-int philosopher_condition[PHILOSOPHERS];
-int philosopher_index[PHILOSOPHERS];
+#include "phil-data.h"
 
 void pickUpChopstick(int chopstick) {
   //lock mutex
@@ -62,20 +52,6 @@ int randomWait(int bound) {
   return wait;
 }
 
-void printPhilosophers() {
-  // loop through and print condition of each phil
-  for (int i = 0; i < PHILOSOPHERS; i++) {
-    if (philosopher_condition[i] == HUNGRY) {
-      printf("%s", "HUNGRY  ");
-    } else if (philosopher_condition[i] == THINKING) {
-      printf("%s", "THINKING  ");
-    } else if (philosopher_condition[i] == EATING) {
-      printf("%s", "EATING  ");
-    }
-  }
-  printf("\n");
-}
-
 void* run(void* philosopher) {
   int current = *(int*) philosopher;
   // Now make them eat and think until the end of time
@@ -107,10 +83,11 @@ int main() {
     // Call run in new thread
     pthread_create(&philosophers[i], NULL, run, &philosopher_index[i]);
   }
-
+  // While (1) prevents us from ever getting here
   for (int i = 0; i < PHILOSOPHERS; i++) {
     pthread_join(philosophers[i], NULL);
   }
-
+ 
+  // Will also not get here
 	return 0;
 }
