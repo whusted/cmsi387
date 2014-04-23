@@ -12,16 +12,12 @@
 #define EATING 1
 #define HUNGRY 2
 
-// Chopsticks are shared resource
 pthread_mutex_t chopsticks[PHILOSOPHERS];
 int chopstick_condition[PHILOSOPHERS];
 
 int philosopher_condition[PHILOSOPHERS];
 int philosopher_index[PHILOSOPHERS];
 
-/**
- * Initializes synchronization primitives.
- */
 void printPhilosophers(void);
 
 int pickUpChopstick(int chopstick);
