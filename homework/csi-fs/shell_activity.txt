@@ -1,0 +1,146 @@
+willy@willy-VirtualBox:~$ dd if=/dev/zero of=inception count=1024
+1024+0 records in
+1024+0 records out
+524288 bytes (524 kB) copied, 0.00665463 s, 78.8 MB/s
+willy@willy-VirtualBox:~$ ls -l
+total 65124
+drwxr-xr-x  4 willy willy     4096 Apr 29 21:30 cmsi387
+drwxr-xr-x  2 willy willy     4096 Feb 19 13:29 Desktop
+drwxr-xr-x  4 willy willy     4096 Mar 26 10:50 Documents
+drwxr-xr-x  2 willy willy     4096 Feb 19 22:54 Downloads
+-rw-r--r--  1 willy willy     8445 Feb 19 13:18 examples.desktop
+-rw-rw-r--  1 willy willy   524288 Apr 29 21:35 inception
+-rw-r--r--  1 willy willy 12886456 Mar 10 10:35 linux-headers-3.13.0-12_3.13.0-12.32_all.deb
+-rw-r--r--  1 willy willy  1175858 Mar 10 12:57 linux-headers-3.13.0-12-generic_3.13.0-12.32_i386.deb
+-rw-r--r--  1 willy willy 14916644 Mar 10 12:56 linux-image-3.13.0-12-generic_3.13.0-12.32_i386.deb
+-rw-r--r--  1 willy willy 37025606 Mar 10 12:57 linux-image-extra-3.13.0-12-generic_3.13.0-12.32_i386.deb
+-rw-r--r--  1 willy willy    91154 Mar 10 12:57 linux-tools-3.13.0-12-generic_3.13.0-12.32_i386.deb
+drwxr-xr-x  2 willy willy     4096 Feb 19 13:29 Music
+drwxr-xr-x  2 willy willy     4096 Feb 19 13:29 Pictures
+drwxr-xr-x  2 willy willy     4096 Feb 19 13:29 Public
+drwxr-xr-x  2 willy willy     4096 Feb 19 13:29 Templates
+drwxr-xr-x 29 willy willy     4096 Mar 11 15:22 ubuntu-trusty
+drwxr-xr-x  2 willy willy     4096 Feb 19 13:29 Videos
+willy@willy-VirtualBox:~$ mke2fs inception
+mke2fs 1.42 (29-Nov-2011)
+inception is not a block special device.
+Proceed anyway? (y,n) y
+Discarding device blocks: done                            
+Filesystem label=
+OS type: Linux
+Block size=1024 (log=0)
+Fragment size=1024 (log=0)
+Stride=0 blocks, Stripe width=0 blocks
+64 inodes, 512 blocks
+25 blocks (4.88%) reserved for the super user
+First data block=1
+Maximum filesystem blocks=524288
+1 block group
+8192 blocks per group, 8192 fragments per group
+64 inodes per group
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Writing superblocks and filesystem accounting information: done
+
+willy@willy-VirtualBox:~$ ls
+cmsi387
+Desktop
+Documents
+Downloads
+examples.desktop
+inception
+linux-headers-3.13.0-12_3.13.0-12.32_all.deb
+linux-headers-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-image-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-image-extra-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-tools-3.13.0-12-generic_3.13.0-12.32_i386.deb
+Music
+Pictures
+Public
+Templates
+ubuntu-trusty
+Videos
+willy@willy-VirtualBox:~$ mkdir inception-mount
+willy@willy-VirtualBox:~$ ls
+cmsi387
+Desktop
+Documents
+Downloads
+examples.desktop
+inception
+inception-mount
+linux-headers-3.13.0-12_3.13.0-12.32_all.deb
+linux-headers-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-image-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-image-extra-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-tools-3.13.0-12-generic_3.13.0-12.32_i386.deb
+Music
+Pictures
+Public
+Templates
+ubuntu-trusty
+Videos
+willy@willy-VirtualBox:~$ mount -o loop -o nosuid -o nodev inception inception-mount
+mount: only root can do that
+willy@willy-VirtualBox:~$ sudo mount -o loop -o nosuid -o nodev inception inception-mount
+[sudo] password for willy: 
+willy@willy-VirtualBox:~$ ls
+cmsi387
+Desktop
+Documents
+Downloads
+examples.desktop
+inception
+inception-mount
+linux-headers-3.13.0-12_3.13.0-12.32_all.deb
+linux-headers-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-image-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-image-extra-3.13.0-12-generic_3.13.0-12.32_i386.deb
+linux-tools-3.13.0-12-generic_3.13.0-12.32_i386.deb
+Music
+Pictures
+Public
+Templates
+ubuntu-trusty
+Videos
+willy@willy-VirtualBox:~$ cd inception-mount/
+willy@willy-VirtualBox:~/inception-mount$ ls
+lost+found
+willy@willy-VirtualBox:~/inception-mount$ df
+Filesystem     1K-blocks     Used Available Use% Mounted on
+/dev/sda1       23605692 13585268   8798288  61% /
+udev              990172        4    990168   1% /dev
+tmpfs             399596      756    398840   1% /run
+none                5120        0      5120   0% /run/lock
+none              998984      124    998860   1% /run/shm
+/dev/loop0           499       15       459   4% /home/willy/inception-mount
+willy@willy-VirtualBox:~/inception-mount$ df -H
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        25G   14G  9.1G  61% /
+udev            1.1G  4.1k  1.1G   1% /dev
+tmpfs           410M  775k  409M   1% /run
+none            5.3M     0  5.3M   0% /run/lock
+none            1.1G  127k  1.1G   1% /run/shm
+/dev/loop0      511k   16k  471k   4% /home/willy/inception-mount
+willy@willy-VirtualBox:~/inception-mount$ ls -a
+.  ..  lost+found
+willy@willy-VirtualBox:~/inception-mount$ ls
+lost+found
+willy@willy-VirtualBox:~/inception-mount$ cat > welcome.txt
+Welcome to my virtual disk on top of a virtual machine.willy@willy-VirtualBox:~/inception-mount$ ls
+lost+found  welcome.txt
+willy@willy-VirtualBox:~/inception-mount$ echo welcome.txt 
+welcome.txt
+willy@willy-VirtualBox:~/inception-mount$ vim welcome.txt 
+willy@willy-VirtualBox:~/inception-mount$ ls
+lost+found  welcome.txt
+willy@willy-VirtualBox:~/inception-mount$ mkdir sample_folder
+willy@willy-VirtualBox:~/inception-mount$ ls
+lost+found  sample_folder  welcome.txt
+willy@willy-VirtualBox:~/inception-mount$ cd sample_folder/
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ vim sub_sample.txt
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ ls
+sub_sample.txt
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ 
+
