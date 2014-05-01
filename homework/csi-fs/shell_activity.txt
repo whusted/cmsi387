@@ -142,5 +142,36 @@ willy@willy-VirtualBox:~/inception-mount$ cd sample_folder/
 willy@willy-VirtualBox:~/inception-mount/sample_folder$ vim sub_sample.txt
 willy@willy-VirtualBox:~/inception-mount/sample_folder$ ls
 sub_sample.txt
+willy@willy-VirtualBox:~/inception-mount$ cd sample_folder/
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ ln -s ../welcome.txt soft_link
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ ls
+soft_link  sub_sample.txt
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ ls -l
+total 1
+lrwxrwxrwx 1 willy willy 14 Apr 30 21:14 soft_link -> ../welcome.txt
+-rw-rw-r-- 1 willy willy 34 Apr 29 22:14 sub_sample.txt
 willy@willy-VirtualBox:~/inception-mount/sample_folder$ 
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ cd ..
+willy@willy-VirtualBox:~/inception-mount$ ls
+lost+found  sample_folder  welcome.txt
+willy@willy-VirtualBox:~/inception-mount$ ln sample_folder/sub_sample.txt hard_link
+willy@willy-VirtualBox:~/inception-mount$ ls -l
+total 15
+-rw-rw-r-- 2 willy willy    34 Apr 29 22:14 hard_link
+drwx------ 2 root  root  12288 Apr 29 21:38 lost+found
+drwxrwxr-x 2 willy willy  1024 Apr 30 21:14 sample_folder
+-rw-rw-r-- 1 willy willy    56 Apr 29 22:12 welcome.txt
+willy@willy-VirtualBox:~/inception-mount$
+willy@willy-VirtualBox:~/inception-mount$ ls -F
+hard_link  lost+found/  sample_folder/  welcome.txt
+willy@willy-VirtualBox:~/inception-mount$ ls -a
+.  ..  hard_link  lost+found  sample_folder  welcome.txt
+willy@willy-VirtualBox:~/inception-mount$ cd sample_folder/
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ ls -i
+13 soft_link  15 sub_sample.txt
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ ls -F
+soft_link@  sub_sample.txt
+willy@willy-VirtualBox:~/inception-mount/sample_folder$ 
+
+
 
