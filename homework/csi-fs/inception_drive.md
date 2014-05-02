@@ -199,7 +199,7 @@
     0000a7f0  61 20 73 75 62 64 69 72  65 63 74 6f 72 79 2e 00  |a subdirectory..|
     0000a800  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
-    Below is a copy of sub_sample.txt that snuck in somehow :)
+    Below is the data block for a copy of sub_sample.txt that snuck in somehow :)
     0000d400  48 65 6c 6c 6f 21 20 59  6f 75 20 61 72 65 20 69  |Hello! You are i|
     0000d410  6e 20 61 20 73 75 62 64  69 72 65 63 74 6f 72 79  |n a subdirectory|
     0000d420  2e 0a 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
