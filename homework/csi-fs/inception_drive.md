@@ -94,6 +94,8 @@
     00001f60  00 00 00 00 5c 1f 25 4b  00 00 00 00 00 00 00 00  |....\.%K........|
     00001f70  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
+    Below are the files, links, and directories that I made. In order, we have 
+    lost+found, then welcome.txt, then sample_folder, and lastly the hard link.
     00003800  02 00 00 00 0c 00 01 02  2e 00 00 00 02 00 00 00  |................|
     00003810  0c 00 02 02 2e 2e 00 00  0b 00 00 00 14 00 0a 02  |................|
     00003820  6c 6f 73 74 2b 66 6f 75  6e 64 00 00 0e 00 00 00  |lost+found......|
