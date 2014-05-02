@@ -64,6 +64,7 @@
     00001d50  19 00 00 00 1a 00 00 00  00 00 00 00 00 00 00 00  |................|
     00001d60  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
+    Here is the inode for sample_folder, my subdirectory.
     00001d80  fd 41 e8 03 00 04 00 00  19 ca 61 53 16 ca 61 53  |.A........aS..aS|
     00001d90  16 ca 61 53 00 00 00 00  e8 03 02 00 02 00 00 00  |..aS............|
     00001da0  00 00 00 00 00 00 00 00  1c 00 00 00 00 00 00 00  |................|
@@ -94,8 +95,9 @@
     00001f60  00 00 00 00 5c 1f 25 4b  00 00 00 00 00 00 00 00  |....\.%K........|
     00001f70  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
-    Below are the files, links, and directories that I made. In order, we have 
-    lost+found, then welcome.txt, then sample_folder, and lastly the hard link.
+    Below are the files, links, and directories that I made. In order, we have . ,
+    the root directory (2e), then .. , then lost+found, then welcome.txt, then 
+    sample_folder, and lastly the hard link.
     00003800  02 00 00 00 0c 00 01 02  2e 00 00 00 02 00 00 00  |................|
     00003810  0c 00 02 02 2e 2e 00 00  0b 00 00 00 14 00 0a 02  |................|
     00003820  6c 6f 73 74 2b 66 6f 75  6e 64 00 00 0e 00 00 00  |lost+found......|
@@ -176,6 +178,7 @@
     00008410  01 00 00 00 01 00 00 00  00 00 00 00 00 00 00 00  |................|
     00008420  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
+    Below is the data block for welcome.txt
     00009400  57 65 6c 63 6f 6d 65 20  74 6f 20 6d 79 20 76 69  |Welcome to my vi|
     00009410  72 74 75 61 6c 20 64 69  73 6b 20 6f 6e 20 74 6f  |rtual disk on to|
     00009420  70 20 6f 66 20 61 20 76  69 72 74 75 61 6c 20 6d  |p of a virtual m|
@@ -186,11 +189,13 @@
     00009810  02 00 00 00 de 0f 00 00  dd 0f 00 00 00 00 00 00  |................|
     00009820  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
+    Below is the data block for sub_sample.txt
     0000a7d0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 48 65  |..............He|
     0000a7e0  6c 6c 6f 21 20 59 6f 75  20 61 72 65 20 69 6e 20  |llo! You are in |
     0000a7f0  61 20 73 75 62 64 69 72  65 63 74 6f 72 79 2e 00  |a subdirectory..|
     0000a800  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
+    Below is a copy of sub_sample.txt that snuck in somehow :)
     0000d400  48 65 6c 6c 6f 21 20 59  6f 75 20 61 72 65 20 69  |Hello! You are i|
     0000d410  6e 20 61 20 73 75 62 64  69 72 65 63 74 6f 72 79  |n a subdirectory|
     0000d420  2e 0a 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
