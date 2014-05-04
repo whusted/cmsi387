@@ -9,7 +9,7 @@
  */
 int main() {
     /* String to hold the command to run. */
-    while (1) {
+    while (!feof(stdin)) {
         int noAmpersand = 1;
         char *arguments[10];
         char input[256];
