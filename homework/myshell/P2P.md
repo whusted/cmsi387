@@ -12,6 +12,6 @@
 >     Meanwhile I added a note on how to catch this EOF.
 
 ##### 3. Does Ctrl-D exit your shell? Why or why not?
-###### No, Ctrl-D does not exit my shell; instead, it puts it into an infinite loop of constantly calling the last command that was inputed. Ctrl-D on Linux and Mac OS X sends a signal that no more characters are available, i.e. the current process (my shell) receives the [End-of-File] signal. My while loop, therefore, runs infinitely, ignoring the [End-of-File] signal and simply checking the always-true condition of 1.
+###### EDIT: Yes, Ctrl-D exits my shell. My *fixed* while loop checks for the End-of-File signal before executing. Ctrl-D on Mac Os X (and Linux) sends a signal that no more characters are available - the End-of-File or EOF signal - thus exiting my shell.
 
 > JD: But there *is* a way to detect EOF with `fgets`, and that is the bit that was missed.
