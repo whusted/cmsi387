@@ -15,8 +15,10 @@ int main() {
         char input[256];
         printf("Enter the command to run: ");
         fgets(input, sizeof(input), stdin);
+        // JD: man fgets to figure out how to detect EOF.
 
          /* Check if & is last character BEFORE tokenizing*/
+        // JD: Good call.
         if (input[strlen(input) - 2] == '&') {
             // Remove &
             input[strlen(input) - 2] = '\0';
@@ -41,6 +43,7 @@ int main() {
             chdir(arguments[1]);
         } else if (strcmp("secret-system-call", arguments[0]) == 0) {
             int result = syscall(351);
+            // JD: You may as well do something with result.
         } else {
 
             /* Variable that will store the fork result. */
