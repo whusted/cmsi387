@@ -14,12 +14,15 @@ void setPageTable(pagetable *pt) {
 
 int getPhysical(int logical) {
   // Check if argument is out of range
+  // JD: The max bounds check can be done without hardcoding through
+  //     good use of the #define's in the header file.
   if (logical < 0 || logical >= 256) {
     return ERR_OUT_OF_RANGE;
   }
 
   // Get left and right bits
   int leftBits = ((logical & PAGEMASK) >> PAGEBITS);
+  // JD: You don't need to bitwise-"&" if you're right-shifting anyway.
   int rightBits = (logical & PAGESIZE);
 
 

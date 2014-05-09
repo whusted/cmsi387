@@ -26,6 +26,7 @@ void* run(void* philosopher) {
 int main() {
 
   // Philosophers are the threads
+  // JD: Ack, TAAAAAAB in the line below!
 	pthread_t philosophers[PHILOSOPHERS];
 
   // Loop through philosopher indexes, initialize to thinking
@@ -43,5 +44,6 @@ int main() {
   }
  
   // Will also not get here
+  // JD: Here too!  AIEEEYEEEYEEEIEEEE!
 	return 0;
 }

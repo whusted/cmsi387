@@ -6,8 +6,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+// JD: You call this in multiple threads, and not from within any
+//     criical section.  This may result in occasional "interleaved"
+//     output if more than 1 thread happens to be doing this within
+//     a very short amount of time.
 void printPhilosophers() {
   // loop through and print condition of each phil
+  // JD: This is nice and straightforward, but can be a level richer,
+  //     I think, if you also display chopstick state between the
+  //     5 philosophers.
   for (int i = 0; i < PHILOSOPHERS; i++) {
     if (philosopher_condition[i] == HUNGRY) {
       printf("%s", "HUNGRY  ");
@@ -34,6 +41,11 @@ void pickUpChopstick(int chopstick) {
 void dropChopstick(int chopstick) {
   pthread_mutex_unlock(&chopsticks[chopstick]);
   chopstick_condition[chopstick] -= 1;
+  // JD: ^^^Do your state change *before* you unlock---that way you
+  //     are guaranteed to "own" the chopstick.  And, like in
+  //     pickUpChopstick, you can do another sanity check before
+  //     marking the chopstick as being down: said chopstick must
+  //     still be held by you right before you put it down.
 }
 
 // From bounded buffer
