@@ -73,6 +73,9 @@
     00001de0  00 00 00 00 58 1f 25 4b  00 00 00 00 00 00 00 00  |....X.%K........|
     00001df0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     Here is the inode for welcome.txt.
+    
+    > JD: Nope, sorry, wrong one.
+    
     00001e00  ff a1 e8 03 0e 00 00 00  19 ca 61 53 16 ca 61 53  |..........aS..aS|
     00001e10  16 ca 61 53 00 00 00 00  e8 03 01 00 00 00 00 00  |..aS............|
     00001e20  00 00 00 00 00 00 00 00  2e 2e 2f 77 65 6c 63 6f  |........../welco|
@@ -83,6 +86,10 @@
     00001e70  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     Here is the inode for sub_sample.txt, as well the hard link that links to the
     txt file.
+    
+    > JD: What hard link?  You have no way of knowing that in the inode section.
+    >     And, no, this isn't sub_sample.txt.
+    
     00001e80  b4 81 e8 03 38 00 00 00  80 00 63 53 30 86 60 53  |....8.....cS0.`S|
     00001e90  30 86 60 53 00 00 00 00  e8 03 01 00 02 00 00 00  |0.`S............|
     00001ea0  00 00 00 00 00 00 00 00  25 00 00 00 00 00 00 00  |........%.......|
@@ -91,6 +98,9 @@
     00001ee0  00 00 00 00 57 1f 25 4b  00 00 00 00 00 00 00 00  |....W.%K........|
     00001ef0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     Here is the inode for the symbolic link of welcome.txt.
+    
+    > JD: No...I don't see the symbolic link here...
+    
     00001f00  b4 81 e8 03 22 00 00 00  f9 ca 61 53 f8 ca 61 53  |....".....aS..aS|
     00001f10  a7 86 60 53 00 00 00 00  e8 03 02 00 02 00 00 00  |..`S............|
     00001f20  00 00 00 00 00 00 00 00  35 00 00 00 00 00 00 00  |........5.......|
@@ -194,12 +204,18 @@
     00009820  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
     Below is the data block for sub_sample.txt
+    
+    > JD: Uhhhhh...no.  No this isn't.
+    
     0000a7d0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 48 65  |..............He|
     0000a7e0  6c 6c 6f 21 20 59 6f 75  20 61 72 65 20 69 6e 20  |llo! You are in |
     0000a7f0  61 20 73 75 62 64 69 72  65 63 74 6f 72 79 2e 00  |a subdirectory..|
     0000a800  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
     *
     Below is the data block for a copy of sub_sample.txt that snuck in somehow :)
+    
+    > JD: Nope, not a copy.  File systems don't sneak, so...
+    
     0000d400  48 65 6c 6c 6f 21 20 59  6f 75 20 61 72 65 20 69  |Hello! You are i|
     0000d410  6e 20 61 20 73 75 62 64  69 72 65 63 74 6f 72 79  |n a subdirectory|
     0000d420  2e 0a 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
